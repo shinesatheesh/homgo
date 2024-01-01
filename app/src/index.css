@@ -28,6 +28,9 @@ ul{
 .btn:hover{
   background-color: rgb(255, 239, 118);
 }
+label{
+  color: white;
+}
 @media screen and (max-width: 640px){
   .btn{
     background-color: rgb(106, 246, 190);
