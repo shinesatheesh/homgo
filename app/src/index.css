@@ -1,0 +1,41 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: "outfit", sans-serif;
+}
+body{
+  background-color: black;
+}
+h1,h2,h4,a,li ,p{
+ color: white;
+ text-decoration: none; 
+ font-family: 'Oswald', sans-serif;
+}
+ul{
+  list-style-type: none;
+
+}
+.btn{
+  background-color: rgb(106, 246, 190);
+  border-style: none;
+  color: white;
+
+}
+.btn:hover{
+  background-color: rgb(255, 239, 118);
+}
+@media screen and (max-width: 640px){
+  .btn{
+    background-color: rgb(106, 246, 190);
+    border-style: none;
+    color: white;
+    margin: 4rem;
+    border-radius: 8px;
+  
+  }
+
+}
