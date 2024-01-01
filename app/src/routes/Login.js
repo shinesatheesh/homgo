@@ -1,20 +1,34 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
 import "./style/login.css";
 
 function Login() {
-
+  const api = "http://localhost:8000/api"
   const [email , setemail] = useState("");
   const [pass , setpass] = useState("");
   const handle = (event)=>{
-    if(event.target.name == "email"){
+    if(event.target.name === "email"){
       setemail(event.target.value);
     }else{
       setpass(event.target.value);
     }
   }
-  console.log(`email ${email}`)
-  console.log(`pass ${pass}`)
+  const submit = async ()=>{
+    try{
+      const response = await axios.post(`${api}/login`,{
+        email: email,
+        pass : pass
+      })
+      if(response){
+        console.log(response.data)
+      }
+    }catch(error){
+      console.log("error")
+    }
+  }
   return (
     <div>
       {/* <Link to="/Register">Register</Link> */}
@@ -30,7 +44,7 @@ function Login() {
         <input type='password' onChange={handle} 
           value={pass}
           name="pass" required/><br/>
-        <button>sign in</button>
+        <button onClick={submit}>sign in</button>
       </div>
       
     </div>
