@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
-
+import env from '../cofig';
+import "./Postdata";
 import "./style/login.css";
+import Postdata from './Postdata';
 
-function Login() {
-  const api = "http://localhost:8000/api"
-  const [email , setemail] = useState("");
-  const [pass , setpass] = useState("");
+function Login({email,setemail,pass,setpass}) {
+
+  const api = env.api;
   const handle = (event)=>{
     if(event.target.name === "email"){
       setemail(event.target.value);
@@ -17,23 +16,16 @@ function Login() {
     }
   }
   const submit = async ()=>{
-    try{
-      const response = await axios.post(`${api}/login`,{
-        email: email,
-        pass : pass
-      })
-      if(response){
-        console.log(response.data)
-      }
-    }catch(error){
-      console.log("error")
+    const result = await Postdata(`${api}/login`,{email: email , pass: pass});
+    console.log(result)
     }
-  }
+  
   return (
     <div>
-      {/* <Link to="/Register">Register</Link> */}
+      <Link to="/Register">Register</Link>
       
-      <div>
+      <div className='container'>
+        <div className='mt-3'>
         <h1>login</h1>
         <label>Email</label>
         <input type='text' onChange={handle} 
@@ -45,10 +37,11 @@ function Login() {
           value={pass}
           name="pass" required/><br/>
         <button onClick={submit}>sign in</button>
+        </div>
       </div>
       
     </div>
   );
-}
+  }
 
 export default Login;

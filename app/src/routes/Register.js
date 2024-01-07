@@ -1,66 +1,86 @@
 import React from 'react';
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBInput,
-  MDBIcon,
-  MDBCheckbox
-}
-from 'mdb-react-ui-kit';
+import "./style/register.css";
+import { Link } from 'react-router-dom';
+import "./Postdata"
+import Postdata from './Postdata';
+import env from "../cofig"
+function Register({email,setemail,pass,setpass,phone,setphone,date,setdate,pass_conf,setpassconf,name,setname}) {
+  const api = env.api;
 
-function Register() {
+  const submit = async ()=>{
+    let data = {
+      email : email,
+      name : name,
+      phone : phone,
+      pass : pass,
+      pass_conf : pass_conf,
+      dob : date
+    }
+    
+    let result = await Postdata(`${api}/register`,data)
+    console.log(result)
+  }
+ const handle = (event)=>{
+  const field = event.target.name;
+  const value = event.target.value;
+  switch(field){
+    case "name":
+      setname(value);
+      break;
+    case "email":
+      setemail(value);
+      break;
+    case "pass":
+      setpass(value);
+      break;
+    case "dob":
+      setdate(value)
+      break;
+    case "phone":
+      setphone(value)
+      break;
+    case "pass_conf":
+      setpassconf(value);
+      break;
+  }
+
+ }
+ 
+
   return (
-    <MDBContainer fluid>
-
-      <MDBCard className='text-black m-5' style={{borderRadius: '25px'}}>
-        <MDBCardBody>
-          <MDBRow>
-            <MDBCol md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
-
-              <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
-              <div className="d-flex flex-row align-items-center mb-4 ">
-                <MDBIcon fas icon="user me-3" size='lg'/>
-                <MDBInput label='Your Name' id='form1' type='text' className='w-100'/>
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <MDBIcon fas icon="envelope me-3" size='lg'/>
-                <MDBInput label='Your Email' id='form2' type='email'/>
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <MDBIcon fas icon="lock me-3" size='lg'/>
-                <MDBInput label='Password' id='form3' type='password'/>
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <MDBIcon fas icon="key me-3" size='lg'/>
-                <MDBInput label='Repeat your password' id='form4' type='password'/>
-              </div>
-
-              <div className='mb-4'>
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
-              </div>
-
-              <MDBBtn className='mb-4' size='lg'>Register</MDBBtn>
-
-            </MDBCol>
-
-            <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
-              <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp' fluid/>
-            </MDBCol>
-
-          </MDBRow>
-        </MDBCardBody>
-      </MDBCard>
-
-    </MDBContainer>
+   <div>
+    
+    <div className='container'>
+      <div className='mt-3' >
+        <h1>Register</h1>
+        <label>Enter your name</label>
+        <input type='text' name='name' value={name} onChange={handle}  required/>
+      
+      <div >
+        <label>Email</label>
+        <input type='text' name='email' value={email} onChange={handle} required/>
+      </div>
+      <div >
+        <label>phone number</label>
+        <input type='number' name='phone' value={phone} onChange={handle} required/>
+      </div>
+      <div >
+        <label>Date of birth</label>
+        <input type='date' name='dob' value={date} onChange={handle} required/>
+      </div>
+      <div >
+        <label>Enter your password</label>
+        <input type='text' name='pass' value={pass} onChange={handle} required/>
+      </div>
+      <div >
+        <label>confirm password</label>
+        <input type='text' name='pass_conf' value={pass_conf} onChange={handle} required/>
+      </div>
+      <button onClick={submit}>submit</button>
+      <Link to="/">Login</Link>
+      </div>
+    </div>
+   </div>
   );
 }
 

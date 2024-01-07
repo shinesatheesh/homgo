@@ -10,5 +10,9 @@ class LoginController extends Controller
     $data = $req->all();
     return $data;
  }
+ function register(Request $req){
+   $data = $req->all();
+   return $data;
 
+ }
 }

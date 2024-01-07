@@ -15,4 +15,5 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/register', [LoginController::class, 'register'])->name('register');
 
